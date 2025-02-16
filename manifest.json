@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Spaceflight News Tab",
+  "version": "1.0",
+  "description": "Displays latest spaceflight news in a beautiful grid layout on new tab",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "icons": {
+    "16": "generated-icon.png",
+    "48": "generated-icon.png",
+    "128": "generated-icon.png"
+  }
+}

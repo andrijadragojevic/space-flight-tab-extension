@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space News</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/newtab.css">
+    <script src="scripts/vendor/feather.min.js"></script>
+</head>
+<body class="bg-dark text-light">
+    <div class="container">
+        <header class="my-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>
+                    <i data-feather="navigation"></i> 
+                    Spaceflight News
+                </h1>
+                <button class="btn btn-outline-light settings-btn" id="settingsBtn">
+                    <i data-feather="settings"></i>
+                </button>
+            </div>
+            <div class="search-container mt-4">
+                <form id="searchForm" class="d-flex justify-content-center">
+                    <div class="input-group" style="max-width: 500px;">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search articles...">
+                        <button class="btn btn-outline-light" type="submit">
+                            <i data-feather="search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </header>
+
+        <div class="widgets-container mb-4">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="widget" id="clockWidget">
+                        <div class="digital-clock">00:00:00</div>
+                        <div class="date">Loading...</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="widget" id="weatherWidget">
+                        <div class="weather-content">
+                            <div class="weather-loading">Loading weather...</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="widget" id="shortcutsWidget">
+                        <div class="shortcuts-grid">
+                            <button class="add-shortcut-btn">
+                                <i data-feather="plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="text-center my-5">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div id="error" class="alert alert-danger d-none" role="alert">
+            Failed to load news. Please try again later.
+        </div>
+
+        <div class="news-section">
+            <div class="news-grid" id="newsGrid">
+                <!-- News cards will be inserted here -->
+            </div>
+
+            <div class="text-center mt-4">
+                <button id="showAllBtn" class="btn btn-outline-light">
+                    Show All News
+                </button>
+            </div>
+        </div>
+
+        <div id="pagination" class="my-4 d-none">
+            <!-- Pagination will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="widget-toggles mb-4">
+                        <h6 class="mb-3">Widget Display</h6>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="clockToggle" checked>
+                            <label class="form-check-label" for="clockToggle">Show Clock</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="weatherToggle" checked>
+                            <label class="form-check-label" for="weatherToggle">Show Weather</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="shortcutsToggle" checked>
+                            <label class="form-check-label" for="shortcutsToggle">Show Shortcuts</label>
+                        </div>
+                    </div>
+
+                    <div class="theme-settings mb-4">
+                    <h6 class="mb-3">Theme Settings</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="themeMode" id="darkMode" value="dark" checked>
+                        <label class="form-check-label" for="darkMode">
+                            Dark Mode
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="themeMode" id="lightMode" value="light">
+                        <label class="form-check-label" for="lightMode">
+                            Light Mode
+                        </label>
+                    </div>
+                </div>
+
+                <div class="clock-settings mb-4">
+                        <h6 class="mb-3">Clock Settings</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="clockFormat" id="clock24" value="24" checked>
+                            <label class="form-check-label" for="clock24">
+                                24-hour format
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="clockFormat" id="clock12" value="12">
+                            <label class="form-check-label" for="clock12">
+                                12-hour format
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="weather-settings">
+                        <h6 class="mb-3">Weather Settings</h6>
+                        <div class="mb-3">
+                            <label for="cityInput" class="form-label">City</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cityInput" placeholder="Enter city name">
+                                <button class="btn btn-outline-light" type="button" id="saveCity">Save</button>
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tempUnit" id="unitC" value="metric">
+                            <label class="form-check-label" for="unitC">
+                                Celsius (°C)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tempUnit" id="unitF" value="imperial" checked>
+                            <label class="form-check-label" for="unitF">
+                                Fahrenheit (°F)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/vendor/bootstrap.bundle.min.js"></script>
+    <script src="scripts/newtab.js"></script>
+</body>
+</html>

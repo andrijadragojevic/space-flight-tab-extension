@@ -1,0 +1,318 @@
+:root[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --bg-tertiary: #3a3a3a;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-tertiary: #999999;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-tertiary: #e5e5e5;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --text-tertiary: #666666;
+    --border-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    padding-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.news-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.news-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #1a1a1a;
+}
+
+.news-card-content {
+    padding: 1.25rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #ffffff;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+.news-card-summary {
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+.news-card-meta {
+    font-size: 0.8rem;
+    color: #999999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.news-source {
+    background: #3a3a3a;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.news-card-authors {
+    font-size: 0.8rem;
+    color: #999999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Widget Styles */
+.widget {
+    background: #2a2a2a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.digital-clock {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.date {
+    text-align: center;
+    color: #cccccc;
+}
+
+.weather-content {
+    text-align: center;
+}
+
+.weather-icon {
+    margin-bottom: 0.5rem;
+}
+
+.weather-icon img {
+    width: 64px;
+    height: 64px;
+}
+
+.weather-temp {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.weather-desc {
+    color: #cccccc;
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+}
+
+.weather-location {
+    font-size: 0.9rem;
+    color: #999999;
+}
+
+.shortcuts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+}
+
+.shortcut-wrapper {
+    position: relative;
+    width: 48px;
+    height: 48px;
+}
+
+.shortcut-item, .add-shortcut-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #3a3a3a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.shortcut-item:hover, .add-shortcut-btn:hover {
+    transform: translateY(-2px);
+    background: #4a4a4a;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.shortcut-item img {
+    width: 24px;
+    height: 24px;
+}
+
+.shortcut-delete {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #dc3545;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    padding: 0;
+}
+
+.shortcut-delete svg {
+    width: 12px;
+    height: 12px;
+    color: white;
+}
+
+.shortcut-wrapper:hover .shortcut-delete {
+    opacity: 1;
+}
+
+.shortcut-delete:hover {
+    background: #bb2d3b;
+}
+
+/* Modal Styles */
+.modal-content {
+    background: #2a2a2a !important;
+    color: #ffffff;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Pagination Styles */
+.pagination {
+    margin: 2rem 0;
+}
+
+.page-link {
+    background-color: #2a2a2a;
+    border-color: #3a3a3a;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+}
+
+.page-link:hover {
+    background-color: #3a3a3a;
+    border-color: #4a4a4a;
+    color: #ffffff;
+}
+
+.page-item.active .page-link {
+    background-color: #4a4a4a;
+    border-color: #5a5a5a;
+}
+
+.page-item.disabled .page-link {
+    background-color: #242424;
+    border-color: #2a2a2a;
+    color: #666666;
+}
+
+/* Settings Button */
+.settings-btn {
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        #2a2a2a 25%,
+        #3a3a3a 50%,
+        #2a2a2a 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+}
+
+@media (max-width: 768px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .digital-clock {
+        font-size: 2rem;
+    }
+}
