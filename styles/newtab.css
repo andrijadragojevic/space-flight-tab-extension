@@ -265,7 +265,7 @@ body {
     background-color: var(--bg-tertiary);
     border-color: var(--bg-tertiary);
     color: var(--text-primary);
-}btn btn-outline-light
+}
 
 .page-item.active .page-link {
     background-color: var(--bg-tertiary);
@@ -287,6 +287,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.settings-btn:hover {
+    scale: 1.1;
+    opacity: 0.9;
 }
 
 @keyframes shimmer {
